@@ -10,7 +10,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="FloodTheSite" target="7" />
+      <module name="FloodTheSite" target="8" />
     </bytecodeTargetLevel>
   </component>
 </project>
