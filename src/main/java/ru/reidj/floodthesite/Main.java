@@ -1,43 +1,49 @@
 package ru.reidj.floodthesite;
 
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Scanner;
+import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+import java.util.*;
+
+@Slf4j
 public class Main {
     public static void main(String[] args) {
         int score = 0;
         int attempt = 0;
         int moves;
+        Random random = new Random();
         Scanner scanner = new Scanner(System.in);
-        Map<Integer, Sites> sites = new HashMap<>();
-        sites.put((int) (Math.random() * 10), new Sites("VK.COM!"));
-        sites.put((int) (Math.random() * 8), new Sites("TWITTER.COM!"));
-        sites.put((int) (Math.random() * 13), new Sites("MAIL.RU!"));
+        Logger logger = LoggerFactory.getLogger(Main.class);
+
+        Map<Integer, Sites> sites = new HashMap<Integer, Sites>() {{
+            put(random.nextInt(10), new Sites("VK.COM!"));
+            put(random.nextInt(10), new Sites("TWITTER.COM!"));
+            put(random.nextInt(10), new Sites("MAIL.RU!"));
+            put(random.nextInt(10), new Sites("PIKABU.RU!"));
+            put(random.nextInt(10), new Sites("REDDIT.COM!"));
+        }};
 
         try {
-            while (score != 3) {
-                System.out.println("Сделайте ход:");
+            while (score != 4) {
+                logger.info("Сделайте ход:");
                 moves = scanner.nextInt();
                 attempt++;
 
-                for (Iterator<Map.Entry<Integer, Sites>> it = sites.entrySet().iterator(); it.hasNext(); ) {
-                    Map.Entry<Integer, Sites> name = it.next();
-                    for (Integer keys : sites.keySet()) {
-                        if (moves == keys) {
-                            it.remove();
-                            score++;
-                            System.out.println("Вы потопили " + name.getValue().getName());
-                        }
-                        if (sites.isEmpty())
-                            System.out.println("Игра окончена! \nВам потребовалось " + attempt + " хода(ов)");
-                        break;
+                for (Integer keys : sites.keySet()) {
+                    if (moves == keys || sites.isEmpty()) {
+                        logger.info("Вы потопили " + sites.get(keys).getName());
+                        score++;
+                        sites.remove(keys);
                     }
+                    if (sites.isEmpty())
+                        logger.info("Игра окончена! \nВам потребовалось " + attempt + " хода(ов)");
+                    break;
                 }
             }
         } catch (Exception e) {
-            System.out.println("Произошла ошибка!" + e +  " .Перезапустите программу");
+            logger.error("Произошла ошибка! " + e + ". Перезапустите программу");
+            main(args);
         }
     }
 }
