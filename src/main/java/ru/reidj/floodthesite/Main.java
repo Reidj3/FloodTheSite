@@ -16,12 +16,12 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         Logger logger = LoggerFactory.getLogger(Main.class);
 
-        Map<Integer, Sites> sites = new HashMap<Integer, Sites>() {{
-            put(random.nextInt(10), new Sites("VK.COM!"));
-            put(random.nextInt(10), new Sites("TWITTER.COM!"));
-            put(random.nextInt(10), new Sites("MAIL.RU!"));
-            put(random.nextInt(10), new Sites("PIKABU.RU!"));
-            put(random.nextInt(10), new Sites("REDDIT.COM!"));
+        Map<Integer, String> sites = new HashMap<Integer, String>() {{
+            put(random.nextInt(10), "VK.COM!");
+            put(random.nextInt(10), "TWITTER.COM!");
+            put(random.nextInt(10), "MAIL.RU!");
+            put(random.nextInt(10), "PIKABU.RU!");
+            put(random.nextInt(10), "REDDIT.COM!");
         }};
 
         try {
@@ -31,8 +31,8 @@ public class Main {
                 attempt++;
 
                 for (Integer keys : sites.keySet()) {
-                    if (moves == keys || sites.isEmpty()) {
-                        logger.info("Вы потопили " + sites.get(keys).getName());
+                    if (moves == keys) {
+                        logger.info("Вы потопили " + sites.get(keys));
                         score++;
                         sites.remove(keys);
                     }
@@ -42,7 +42,7 @@ public class Main {
                 }
             }
         } catch (Exception e) {
-            logger.error("Произошла ошибка! " + e + ". Перезапустите программу");
+            logger.error("Произошла ошибка! " + e + ". Перезапуск программы");
             main(args);
         }
     }
