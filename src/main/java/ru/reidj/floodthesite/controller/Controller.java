@@ -6,21 +6,13 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
-import java.util.ResourceBundle;
 
 public class Controller {
     @FXML
-    private ResourceBundle resources;
-
-    @FXML
     private Label label;
-
-    @FXML
-    private URL location;
 
     @FXML
     private TextField input;
@@ -30,7 +22,7 @@ public class Controller {
 
     private int attempt = 0;
     private Random random = new Random();
-    Map<Integer, String> sites = new HashMap<Integer, String>() {{
+    private Map<Integer, String> sites = new HashMap<Integer, String>() {{
         put(random.nextInt(10), "VK.COM!");
         put(random.nextInt(10), "TWITTER.COM!");
         put(random.nextInt(10), "MAIL.RU!");
