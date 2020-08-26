@@ -12,10 +12,10 @@ import java.util.Random;
 
 public class Controller {
     @FXML
-    private Label label;
+    private TextField textField;
 
     @FXML
-    private TextField input;
+    private Label label;
 
     @FXML
     private Button button;
@@ -41,13 +41,13 @@ public class Controller {
             button.setOnAction(event -> {
                 attempt++;
                 for (Integer keys : sites.keySet()) {
-                    if (input.getText().contains(keys.toString())) {
+                    if (textField.getText().contains(keys.toString())) {
                         label.setText("Вы потопили " + sites.get(keys));
                         sites.remove(keys);
                     }
                 }
                 if (sites.isEmpty()) {
-                    label.setText("Игра окончена! \nВам потребовалось " + attempt + " хода(ов");
+                    label.setText("Игра окончена! \nВам потребовалось " + attempt + " хода(ов)");
                 }
             });
         } catch (Exception e) {
