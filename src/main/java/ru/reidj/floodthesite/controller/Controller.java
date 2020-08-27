@@ -6,9 +6,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class Controller {
     @FXML
@@ -22,13 +21,14 @@ public class Controller {
 
     private int attempt = 0;
     private Random random = new Random();
-    private Map<Integer, String> sites = new HashMap<Integer, String>() {{
+    private ConcurrentHashMap<Integer, String> sites = new ConcurrentHashMap<Integer, String>() {{
         put(random.nextInt(10), "VK.COM!");
         put(random.nextInt(10), "TWITTER.COM!");
         put(random.nextInt(10), "MAIL.RU!");
         put(random.nextInt(10), "PIKABU.RU!");
         put(random.nextInt(10), "REDDIT.COM!");
     }};
+
     private Stage stage;
 
     public void setStage(Stage stage) {
@@ -40,15 +40,15 @@ public class Controller {
         try {
             button.setOnAction(event -> {
                 attempt++;
-                for (Integer keys : sites.keySet()) {
-                    if (textField.getText().contains(keys.toString())) {
-                        label.setText("Вы потопили " + sites.get(keys));
-                        sites.remove(keys);
+                    for (Integer keys : sites.keySet()) {
+                        if (textField.getText().contains(keys.toString())) {
+                            label.setText("Вы потопили " + sites.get(keys));
+                            System.out.println("" + sites.get(keys));
+                            sites.remove(keys);
+                        }
                     }
-                }
-                if (sites.isEmpty()) {
-                    label.setText("Игра окончена! \nВам потребовалось " + attempt + " хода(ов)");
-                }
+                    if (sites.isEmpty())
+                        label.setText("Игра окончена! \nВам потребовалось " + attempt + " хода(ов)");
             });
         } catch (Exception e) {
             e.printStackTrace();
