@@ -6,7 +6,6 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="550.0" style="-fx-background-color: #967293;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.reidj.floodthesite.controller.Controller">
    <children>
       <TextField fx:id="textField" layoutX="49.0" layoutY="149.0" prefHeight="50.0" prefWidth="455.0">
@@ -19,7 +18,7 @@
             <Font size="26.0" />
          </font>
       </Label>
-      <Button fx:id="button" layoutX="154.0" layoutY="225.0" mnemonicParsing="false" prefHeight="65.0" prefWidth="244.0" text="Сделать ход">
+      <Button fx:id="button" layoutX="157.0" layoutY="225.0" mnemonicParsing="false" prefHeight="76.0" prefWidth="237.0" text="Сделать ход">
          <font>
             <Font size="19.0" />
          </font>
